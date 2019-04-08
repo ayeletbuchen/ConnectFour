@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class ConnectFourFrame extends JFrame {
@@ -16,6 +17,9 @@ public class ConnectFourFrame extends JFrame {
 
         Board board = new Board();
         root.add(board, BorderLayout.CENTER);
+
+
+        root.add(new ButtonsBar(board).getButtons(), BorderLayout.NORTH);
 
         setContentPane(root);
     }
