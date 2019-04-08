@@ -17,7 +17,7 @@ public class Board extends JComponent {
     @Override
     protected void paintComponent(Graphics graphics) {
         graphics.setColor(Color.YELLOW);
-        graphics.fillRect(margin, margin, ConnectFourFrame.WIDTH - (2 * margin), ConnectFourFrame.HEIGHT - (2 * margin));
+        graphics.fillRect(margin, margin, ConnectFourFrame.WIDTH - (2 * margin), ConnectFourFrame.HEIGHT - (3 * margin));
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (firstPaint) {

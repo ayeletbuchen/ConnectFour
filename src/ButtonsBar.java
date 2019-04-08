@@ -3,14 +3,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ButtonsBar {
+public class ButtonsBar extends JPanel{
 
-    private JPanel buttons = new JPanel();
+    private JPanel buttons = new JPanel(
+            new GridLayout(1, 0, 25, 0)
+    );
 
     public ButtonsBar(Board board) {
         for (int i = 0; i < board.getColumns(); i++) {
             JButton button = new JButton(String.valueOf(i + 1));
-            button.setPreferredSize(new Dimension(70, 50));
+            button.setPreferredSize(new Dimension(65, 50));
 
             button.addActionListener(new ActionListener() {
                 @Override
