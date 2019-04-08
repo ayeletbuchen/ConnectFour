@@ -7,10 +7,10 @@ public class Piece extends JComponent {
     private final int yPosition;
     private Color color;
 
-    public Piece(int x, int y) {
+    public Piece(Color color, int x, int y) {
         xPosition = x;
         yPosition = y;
-        setColor(Color.GRAY);
+        setColor(color);
     }
 
     public void setColor(Color color) {

@@ -8,6 +8,7 @@ public class Board extends JComponent {
     private final int space = 25;
     private JPanel board = new JPanel();
     private final int margin = 50;
+    private final Color defaultColor = Color.lightGray;
     private final int pieceSize = 75;
     private Piece[][] pieces = new Piece[rows][cols];
     private boolean black = true;
@@ -17,11 +18,11 @@ public class Board extends JComponent {
     @Override
     protected void paintComponent(Graphics graphics) {
         graphics.setColor(Color.YELLOW);
-        graphics.fillRect(margin, margin, ConnectFourFrame.WIDTH - (2 * margin), ConnectFourFrame.HEIGHT - (3 * margin));
+        graphics.fillRect(margin, margin, ConnectFourFrame.WIDTH - (2 * margin), ConnectFourFrame.HEIGHT - (int) (3.5 * margin));
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 if (firstPaint) {
-                    pieces[i][j] = new Piece(getPieceXPosition(j), getPieceYPosition(i));
+                    pieces[i][j] = new Piece(defaultColor, getPieceXPosition(j), getPieceYPosition(i));
                 }
                 Piece piece = pieces[i][j];
                 graphics.setColor(piece.getColor());
@@ -43,13 +44,25 @@ public class Board extends JComponent {
         return cols;
     }
 
+    public int getMargin() {
+        return margin;
+    }
+
+    public int getSpace() {
+        return space;
+    }
+
+    public int getPieceSize() {
+        return pieceSize;
+    }
+
     public void columnSelected(int col) {
-        if (pieces[0][col].getColor() != Color.GRAY) {
+        if (pieces[0][col].getColor() != defaultColor) {
             return;
         }
 
         int row = 0;
-        for (int i = 0; i < rows && pieces[i][col].getColor() == Color.GRAY; i++) {
+        for (int i = 0; i < rows && pieces[i][col].getColor() == defaultColor; i++) {
             row = i;
         }
 

@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 
 public class ButtonsBar extends JPanel{
 
-    private JPanel buttons = new JPanel(
-            new GridLayout(1, 0, 25, 0)
-    );
+    private JPanel buttons;
 
     public ButtonsBar(Board board) {
+        buttons = new JPanel(new GridLayout(1, 0, board.getSpace(), 0));
+
         for (int i = 0; i < board.getColumns(); i++) {
             JButton button = new JButton(String.valueOf(i + 1));
-            button.setPreferredSize(new Dimension(65, 50));
+            button.setPreferredSize(new Dimension(board.getPieceSize() - 10, board.getMargin()));
 
             button.addActionListener(new ActionListener() {
                 @Override
