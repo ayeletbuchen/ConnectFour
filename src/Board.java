@@ -104,7 +104,7 @@ public class Board extends JComponent {
     }
 
     private boolean isVerticalWin(Color player, int row, int col) {
-        if (row < 2) {
+        if (row > 2) {
             return false;
         }
 
@@ -154,7 +154,7 @@ public class Board extends JComponent {
     private boolean isUpwardDiagonalWin(Color player, int row, int col) {
         int matchingPieces = 1;
 
-        for (int i = row - 1, j = col + 1; i >= 0 && col < cols && pieces[i][j].getColor() == player; i--, j++) {
+        for (int i = row - 1, j = col + 1; i >= 0 && j < cols && pieces[i][j].getColor() == player; i--, j++) {
             matchingPieces++;
         }
 
