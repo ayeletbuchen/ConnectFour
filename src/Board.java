@@ -68,10 +68,10 @@ public class Board extends JComponent {
 
         black = !black;
         firstPaint = false;
+        // TODO change turnLabel
         repaint(pieces[row][col].getXPosition(), pieces[row][col].getYPosition(), pieceSize, pieceSize);
         if (isGameOver(player, row, col)) {
-            System.out.println((player == Color.BLACK ? "Black" : "Red") + " wins!");
-            // TODO turn above statement into dialgoe box and make users unable to continue here
+            askToPlayAgain(player);
         }
     }
 
@@ -167,5 +167,20 @@ public class Board extends JComponent {
         }
 
         return false;
+    }
+
+    private void askToPlayAgain(Color player) {
+        int playAgain = JOptionPane.showConfirmDialog(null,
+                (player == Color.BLACK ? "Black" : "Red") + " wins!" +
+                "\nWould you like to play again?",
+                "Game Over", JOptionPane.YES_NO_OPTION);
+        if (playAgain == JOptionPane.YES_OPTION) {
+            firstPaint = true;
+            //TODO increment score of winner
+            repaint();
+        }
+        else {
+            System.exit(0);
+        }
     }
 }

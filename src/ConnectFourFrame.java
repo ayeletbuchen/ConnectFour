@@ -16,8 +16,10 @@ public class ConnectFourFrame extends JFrame {
 
         Board board = createBoard();
         JPanel buttonsBar = createButtonsBar(board);
+        JPanel statsBar = createStatsBar();
         root.add(board);
         root.add(buttonsBar);
+        root.add(statsBar);
 
         setContentPane(root);
     }
@@ -37,5 +39,12 @@ public class ConnectFourFrame extends JFrame {
         int space = board.getSpace();
         buttonsBar.setLocation(3 * space, space);
         return buttonsBar;
+    }
+
+    private JPanel createStatsBar() {
+        JPanel statsBar = new StatsBar().getStatsBar();
+        statsBar.setSize(WIDTH - (2 * margin), margin);
+        statsBar.setLocation(margin , HEIGHT - (int) (1.5 * margin));
+        return statsBar;
     }
 }
