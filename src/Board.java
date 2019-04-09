@@ -57,7 +57,7 @@ public class Board extends JComponent {
         return pieceSize;
     }
 
-    public void columnSelected(int col) {
+    public void columnSelected(StatsBar statsBar, int col) {
         if (pieces[0][col].getColor() != defaultColor) {
             return;
         }
@@ -68,9 +68,15 @@ public class Board extends JComponent {
 
         black = !black;
         firstPaint = false;
-        // TODO change turnLabel
+        statsBar.changePlayer();
         repaint(pieces[row][col].getXPosition(), pieces[row][col].getYPosition(), pieceSize, pieceSize);
         if (isGameOver(player, row, col)) {
+            if (player == Color.RED) {
+                statsBar.incrementRedScore();
+            }
+            else {
+                statsBar.incrementBlackScore();
+            }
             askToPlayAgain(player);
         }
     }
@@ -176,7 +182,6 @@ public class Board extends JComponent {
                 "Game Over", JOptionPane.YES_NO_OPTION);
         if (playAgain == JOptionPane.YES_OPTION) {
             firstPaint = true;
-            //TODO increment score of winner
             repaint();
         }
         else {

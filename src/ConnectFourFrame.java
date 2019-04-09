@@ -15,11 +15,13 @@ public class ConnectFourFrame extends JFrame {
         root.setLayout(null);
 
         Board board = createBoard();
-        JPanel buttonsBar = createButtonsBar(board);
-        JPanel statsBar = createStatsBar();
+        StatsBar statsBar = new StatsBar();
+        JPanel statsPanel = createStatsBar(statsBar);
+        JPanel buttonsBar = createButtonsBar(board, statsBar);
+
         root.add(board);
         root.add(buttonsBar);
-        root.add(statsBar);
+        root.add(statsPanel);
 
         setContentPane(root);
     }
@@ -33,18 +35,18 @@ public class ConnectFourFrame extends JFrame {
         return board;
     }
 
-    private JPanel createButtonsBar(Board board) {
-        JPanel buttonsBar = new ButtonsBar(board).getButtons();
+    private JPanel createButtonsBar(Board board, StatsBar statsBar) {
+        JPanel buttonsBar = new ButtonsBar(board, statsBar).getButtons();
         buttonsBar.setSize(WIDTH - (3 * margin), margin);
         int space = board.getSpace();
         buttonsBar.setLocation(3 * space, space);
         return buttonsBar;
     }
 
-    private JPanel createStatsBar() {
-        JPanel statsBar = new StatsBar().getStatsBar();
-        statsBar.setSize(WIDTH - (2 * margin), margin);
-        statsBar.setLocation(margin , HEIGHT - (int) (1.5 * margin));
-        return statsBar;
+    private JPanel createStatsBar(StatsBar statsBar) {
+        JPanel statsPanel = statsBar.getStatsBar();
+        statsPanel.setSize(WIDTH - (2 * margin), margin);
+        statsPanel.setLocation(margin , HEIGHT - (int) (1.5 * margin));
+        return statsPanel;
     }
 }

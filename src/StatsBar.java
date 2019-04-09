@@ -46,18 +46,6 @@ public class StatsBar {
         return statsBar;
     }
 
-    public JLabel getRedScore() {
-        return redScore;
-    }
-
-    public JLabel getBlackScore() {
-        return blackScore;
-    }
-
-    public JLabel getTurnLabel() {
-        return turnLabel;
-    }
-
     public void incrementRedScore() {
         redScore.setText(String.valueOf(Integer.parseInt(redScore.getText()) + 1));
     }

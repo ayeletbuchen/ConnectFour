@@ -7,7 +7,7 @@ public class ButtonsBar extends JPanel{
 
     private JPanel buttons;
 
-    public ButtonsBar(Board board) {
+    public ButtonsBar(Board board, StatsBar statsBar) {
         buttons = new JPanel(new GridLayout(1, 0, board.getSpace(), 0));
 
         for (int i = 0; i < board.getColumns(); i++) {
@@ -17,7 +17,7 @@ public class ButtonsBar extends JPanel{
             button.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    board.columnSelected(Integer.parseInt(button.getText()) - 1);
+                    board.columnSelected(statsBar, Integer.parseInt(button.getText()) - 1);
                 }
             });
             buttons.add(button);
