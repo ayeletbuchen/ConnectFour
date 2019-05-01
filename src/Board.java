@@ -14,6 +14,7 @@ public class Board extends JComponent {
     private Piece[][] pieces = new Piece[rows][cols];
     private boolean black = true;
     private boolean firstPaint = true;
+    private int topUsed = 0;
 
 
     @Override
@@ -68,9 +69,13 @@ public class Board extends JComponent {
 
         black = !black;
         firstPaint = false;
+        if (row == 0) {
+            topUsed++;
+        }
         statsBar.changePlayer();
         repaint(pieces[row][col].getXPosition(), pieces[row][col].getYPosition(), pieceSize, pieceSize);
-        if (isGameOver(player, row, col)) {
+
+        if (isGameWon(player, row, col)) {
             if (player == Color.RED) {
                 statsBar.incrementRedScore();
             }
@@ -78,6 +83,9 @@ public class Board extends JComponent {
                 statsBar.incrementBlackScore();
             }
             askToPlayAgain(player);
+        }
+        else if (topUsed == cols) {
+            askToPlayAgain(null);
         }
     }
 
@@ -99,7 +107,7 @@ public class Board extends JComponent {
         }
     }
 
-    private boolean isGameOver(Color player, int row, int col) {
+    private boolean isGameWon(Color player, int row, int col) {
         if (isVerticalWin(player, row, col)
                 || isHorizontalWin(player, row, col)
                 || isDownwardDiagonalWin(player, row, col)
@@ -176,11 +184,18 @@ public class Board extends JComponent {
     }
 
     private void askToPlayAgain(Color player) {
+        String message;
+        if (player == null) {
+            message = "It's a tie!";
+        }
+        else {
+            message = (player == Color.BLACK ? "Black" : "Red") + " wins!";
+        }
         int playAgain = JOptionPane.showConfirmDialog(null,
-                (player == Color.BLACK ? "Black" : "Red") + " wins!" +
-                "\nWould you like to play again?",
+                message + "\nWould you like to play again?",
                 "Game Over", JOptionPane.YES_NO_OPTION);
         if (playAgain == JOptionPane.YES_OPTION) {
+            topUsed = 0;
             firstPaint = true;
             repaint();
         }
